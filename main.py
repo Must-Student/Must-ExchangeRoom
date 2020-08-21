@@ -234,7 +234,11 @@ def MainPage_post():
 
 
 
+@app.route('/',methods=['GET'])
+def basic_get():
+    return redirect('/verify')
+
 
 if __name__ == '__main__':
 
-    app.run(host='0.0.0.0', port=80, debug=True,threaded=True)
+    app.run(host='127.0.0.1', port=8081, debug=False,threaded=True,ssl_context=('/etc/nginx/ssl/1_must-student.xyz_bundle.crt','/etc/nginx/ssl/2_must-student.xyz.key'))
