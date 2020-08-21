@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # coding:utf-8
-#Github https://github.com/Must-Student/Must-ExchangeRoom
 from flask import Flask,request,session,redirect,Response
 import os
 from HtmlSource import *
@@ -97,9 +96,16 @@ def signup_post():
         PassWord=str(request.form['PassWord'])
         randomPort = str(random.randint(1000, 9999))
         IsVerified=str(randomPort)
-        send_mail(EmailAddress,'请验证您的邮箱地址', '请将验证码填入网页以验证：'+randomPort)
+        try:
+            send_mail(EmailAddress, '请验证您的邮箱地址', '请将验证码填入网页以验证：' + randomPort)
+        except:
+            print(EmailAddress,'邮件发送失败')
         a=ReturnInfoFromSexIdealAddressIdealModel(Sex,IdealAddress,IdealModel,Address,Model)
-        SendEmailToNotifyNewInfo(a, EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note)
+        try:
+            SendEmailToNotifyNewInfo(a, EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note)
+
+        except:
+            print('提醒邮件邮件发送失败')
         adduser(EmailAddress, UserName, ContactInfo, PassWord, IsVerified, Sex, Address, Model, IdealAddress,
                 IdealModel, Note)
         response = redirect('/VerifyEmail')
@@ -231,8 +237,6 @@ def MainPage_post():
         return response
     else:
         print('hello')
-
-
 
 @app.route('/',methods=['GET'])
 def basic_get():
