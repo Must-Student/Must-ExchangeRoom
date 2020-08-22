@@ -137,8 +137,8 @@ SignupSourceCode="""
 <p>请输入姓名:<br>
 <input type="text" name="UserName" id="UserName" placeholder="请输入用户名" class="logininput form-control input-lg">
 <br>
-<p>请输入学校邮箱地址（确保输入无误，稍后将发邮件验证）:<br>
-<input type="text" name="EmailAddress" id="EmailAddress" placeholder="请输入邮箱地址" class="logininput form-control input-lg">
+<p>请输入学校邮箱地址（确保输入无误，稍后将发邮件验证）。邮箱地址形如12345@student.must.edu.mo,仅需输入123456即可:<br>
+<input type="text" name="EmailAddress" id="EmailAddress" placeholder="请输入邮箱地址" class="logininput form-control input-lg">@student.must.edu.mo
 <br>
 <p>请输入联系信息（QQ/微信号/电话号码 均可）:<br>
 <input type="text" name="ContactInfo" id="ContactInfo" placeholder="例：QQ10000" class="logininput form-control input-lg">
@@ -176,6 +176,8 @@ VerifyEmailSourceCode="""
 <input type="text" name="VerifyCode" id="VerifyCode" placeholder="验证码" class="logininput form-control input-lg"><br>
  <button style="float: left;" class="btn btn-info" type="submit" id="loginbtn">提交</button>
  </form>
+  <br>
+  <a href='/mainpage'target='_blank'>跳过认证</a>
 
 """
 MainPageSourceCode="""
