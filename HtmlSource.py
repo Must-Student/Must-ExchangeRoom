@@ -106,7 +106,7 @@ console.log("本站由Python Flask开发");
 		<form action="/signin" method="post">
             <div class="input-group m-top20">
                 <span class="input-group-addon"><i class="icon-user"></i></span>
-                <input type="text" name="EmailAddress" id="EmailAddress" placeholder="请输入邮箱地址" class="logininput form-control input-lg">
+                <input type="text" name="EmailAddress" id="EmailAddress" placeholder="请输入邮箱全称地址，带@" class="logininput form-control input-lg">
             </div>
             <div class="input-group m-top20">
                 <span class="input-group-addon"><i class="icon-unlock-alt"></i></span>
