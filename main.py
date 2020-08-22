@@ -173,7 +173,7 @@ def MainPage_get():
         if str(ReadMd5(EmailAddress) )==Md5:
 
             if not(str(ReturnEmailAddressIsVerified(EmailAddress))=='1'):
-                EmailState="<br><a href=/VerifyEmail target='_blank'> 邮箱地址未验证</a>"
+                EmailState="<br><a href=/VerifyEmail target='_blank'> 邮箱地址未验证</a>,验证邮箱地址可确保您收到通知邮件"
             try:
                 IdealAddress=(request.cookies.get('IdealAddress'))
             except:
