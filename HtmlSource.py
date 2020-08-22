@@ -186,7 +186,7 @@ VerifyEmailSourceCode = """
 """
 MainPageSourceCode = """
 <br><br><p><font color="#FF0000">该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换。</font><br>
-<meta http-equiv="refresh" content="30">
+<meta http-equiv="refresh" content="10">
 
 <form  action="/mainpage" method="post">
    <input type="hidden" style="visibility: hidden;" name="formname" value="Search" />
@@ -201,7 +201,7 @@ MainPageSourceCode = """
  <input type="hidden" style="visibility: hidden;" name="formname" value="ClearSearch" />
 <button type="submit" id="loginbtn">清除搜索信息</button>
 </form>
-<p><br>页面30秒自动刷新一次<br>
+<p><br>页面10秒自动刷新一次<br>
 <p>温馨提示，您无需一直监测页面，如出现与您登记户型和地址一致的宿舍，系统将自动发邮件通知您
 <br>
 
