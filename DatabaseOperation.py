@@ -10,9 +10,9 @@ def md5(password):
     return (hashedPassword.hexdigest())
 
 
-sqlservername='ServerName'
-sqluser='username'
-sqlpasswd='password'
+sqlservername='ServerHere'
+sqluser='exchangeroom'
+sqlpasswd='passwordHere'
 sqldatabase='ExchangeRoom'
 
 def CheckIfUserExist(emailaddress):
@@ -61,17 +61,20 @@ def UpdateIsVerified(EmailAddress,VerifyCode):
     db.close()
     return 1
 def ReadMd5(EmailAddress):
-    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
-    check = db.cursor()
-    sql = 'select Md5 from ' + sqldatabase + '.AccountInfo where EmailAddress =' + "'" + str(EmailAddress) + "'"
-    #print(sql)
-    check.execute(sql)
-    a = check.fetchone()
-    a = list(str(a).replace('(', '').replace(')', '').replace("'", "").split(','))
-    #print(a)
-    if a[0] is not None:
-        return a[0]
-    else:
+    try:
+        db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+        check = db.cursor()
+        sql = 'select Md5 from ' + sqldatabase + '.AccountInfo where EmailAddress =' + "'" + str(EmailAddress) + "'"
+        # print(sql)
+        check.execute(sql)
+        a = check.fetchone()
+        a = list(str(a).replace('(', '').replace(')', '').replace("'", "").split(','))
+        # print(a)
+        if a[0] is not None:
+            return a[0]
+        else:
+            return 0
+    except:
         return 0
 
 def CheckEmailAddressPassWord(EmailAddress,PassWord):
@@ -151,6 +154,18 @@ def ReturnInfoFromSexIdealAddressIdealModel(Sex,IdealAddress,IdealModel,Address,
     a = check.fetchall()
     # print(a)
     return a
+
+
+def ReturnEmailAddressIsVerified(EmailAddress):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql = "select IsVerified from ExchangeRoom.AccountInfo where EmailAddress=" + "'" + EmailAddress + "'"
+    try :
+        check.execute(sql)
+        a=check.fetchone()
+        return a
+    except:
+        return '999'
 
 
 
