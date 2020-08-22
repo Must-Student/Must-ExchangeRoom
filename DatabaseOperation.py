@@ -139,13 +139,12 @@ def ReturnInfoFromSexIdealAddressIdealModel(Sex,IdealAddress,IdealModel,Address,
     sql=''
     if IdealModel=='0':
         if IdealAddress=='0':
-            sql="select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and (IdealAddress='0' or IdealAddress='" + "'" + Address + "')"+ " and (IdealModel='0' or IdealModel='" + "'" + Model + "')"
+            sql="select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and (IdealAddress='0' or IdealAddress=" + "'" + Address + "')"+ " and (IdealModel='0' or IdealModel=" + "'" + Model + "')"
         else:
-            sql = "select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and Address=" + "'" + IdealAddress + "'" + + " and (IdealAddress='0' or IdealAddress='" + "'" + Address + "')" + " and (IdealModel='0' or IdealModel='" + "'" + Model + "')"
+            sql = "select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and Address=" + "'" + IdealAddress + "'" + + " and (IdealAddress='0' or IdealAddress='" + "'" + Address + "')" + " and (IdealModel='0' or IdealModel=" + "'" + Model + "')"
     else:
         if IdealAddress=='0':
-            sql = "select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and Model=" + "'" + IdealModel + "'" + + " and (IdealAddress='0' or IdealAddress='" + "'" + Address + "')" + " and (IdealModel='0' or IdealModel='" + "'" + Model + "')"
-
+            sql = "select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and Model=" + "'" + IdealModel + "'"  + " and (IdealAddress='0' or IdealAddress=" + "'" + Address + "')" + " and (IdealModel='0' or IdealModel=" + "'" + Model + "')"
         else:
             sql = "select EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note,MyDeal from ExchangeRoom.AccountInfo where Sex=" + "'" + Sex + "'" + " and Address=" + "'" + IdealAddress + "'" + " and Model=" + "'" + IdealModel + "'" + " and (IdealAddress='0' or IdealAddress=" + "'" + Address + "')" + " and (IdealModel='0' or IdealModel=" + "'" + Model + "')"
 
