@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # coding:utf-8
-#Github https://github.com/Must-Student
 from flask import Flask,request,session,redirect,Response
 import os
 from HtmlSource import *
@@ -15,10 +14,10 @@ VerifyCode='633305981'
 
 def SendEmailToNotifyNewInfo(a,EmailAddress,UserName,Sex,Address,Model,ContactInfo,Note):
     for i in a:
-        EmailAddress = i[0]
+        EmailAddress_NeedToSend = i[0]
         Subject='MUST-学生换租系统-您有新的可换租信息'
         Contenct='以下是新增的符合您预留的换租信息，您也可以登录https://must-student.xyz 详细查询:\n邮箱地址 用户名 性别 房租地 房型 联系信息 备注 是否已交换成功(是则显示对方邮箱地址，否显示0)\n'+ EmailAddress+' '+UserName+' '+Sex+' '+Address+' '+Model+' '+ContactInfo+' '+Note+' '+'0'
-        send_mail(EmailAddress,Subject,Contenct)
+        send_mail(EmailAddress_NeedToSend,Subject,Contenct)
 
         print('收件人：',EmailAddress)
         print('正文：',Contenct)
@@ -46,8 +45,14 @@ def verify_post():
 @app.route('/signin',methods=['GET'])
 def signin_get():
     verify=request.cookies.get('verify')
+    EmailAddress = request.cookies.get('EmailAddress')
+    Md5= request.cookies.get('Md5')
     if verify ==VerifyCode:
-        return (SigninSourceCode)
+        if str(ReadMd5(EmailAddress)) == Md5:
+            return redirect('/mainpage')
+        else:
+
+            return (SigninSourceCode)
     else:
         return redirect('/verify')
 @app.route('/signin',methods=['post'])
@@ -76,8 +81,13 @@ def signin_post():
 @app.route('/signup',methods=['GET'])
 def signup_get():
     verify=request.cookies.get('verify')
+    EmailAddress = request.cookies.get('EmailAddress')
+    Md5 = request.cookies.get('Md5')
     if verify ==VerifyCode:
-        return (SignupSourceCode)
+        if str(ReadMd5(EmailAddress)) == Md5:
+            return redirect('/mainpage')
+        else:
+            return (SignupSourceCode)
     else:
         return redirect('/verify')
 
@@ -97,11 +107,13 @@ def signup_post():
         PassWord=str(request.form['PassWord'])
         randomPort = str(random.randint(1000, 9999))
         IsVerified=str(randomPort)
+        if EmailAddress.find('@')==-1:
+            EmailAddress=EmailAddress+'@student.must.edu.mo'
         try:
             send_mail(EmailAddress, '请验证您的邮箱地址', '请将验证码填入网页以验证：' + randomPort)
         except:
-            print(EmailAddress,'邮件发送失败')
-        a=ReturnInfoFromSexIdealAddressIdealModel(Sex,IdealAddress,IdealModel,Address,Model)
+            print(EmailAddress, '邮件发送失败')
+        a = ReturnInfoFromSexIdealAddressIdealModel(Sex, IdealAddress, IdealModel, Address, Model)
         try:
             SendEmailToNotifyNewInfo(a, EmailAddress, UserName, Sex, Address, Model, ContactInfo, Note)
 
@@ -111,6 +123,7 @@ def signup_post():
                 IdealModel, Note)
         response = redirect('/VerifyEmail')
         response.set_cookie('EmailAddress', EmailAddress, max_age=7 * 24 * 3600)
+        response.set_cookie('Md5', str(md5(PassWord)) + '2020', max_age=7 * 24 * 3600)
         return response
 
     else:
@@ -119,9 +132,11 @@ def signup_post():
 @app.route('/VerifyEmail',methods=['GET'])
 def VerifyEmail_get():
     verify=request.cookies.get('verify')
-    EmailAddress= request.cookies.get('EmailAddress')
+    EmailAddress = request.cookies.get('EmailAddress')
+    #UserName = request.cookies.get('UserName')
+    PreInfo='<p> 欢迎您 '+EmailAddress+'<br>'
     if verify ==VerifyCode:
-        return (VerifyEmailSourceCode)
+        return (PreInfo+VerifyEmailSourceCode)
     else:
         return redirect('/verify')
 
@@ -153,8 +168,12 @@ def MainPage_get():
     verify=request.cookies.get('verify')
     EmailAddress= request.cookies.get('EmailAddress')
     Md5=request.cookies.get('Md5')
+    Preinfo='<p>欢迎您 '+EmailAddress+'<a href=/signout> 注销</a><br>'
     if str(verify) ==str(VerifyCode):
         if str(ReadMd5(EmailAddress) )==Md5:
+
+            if not(str(ReturnEmailAddressIsVerified(EmailAddress))=='1'):
+                EmailState="<br><a href=/VerifyEmail target='_blank'> 邮箱地址未验证</a>"
             try:
                 IdealAddress=(request.cookies.get('IdealAddress'))
             except:
@@ -164,7 +183,7 @@ def MainPage_get():
             except:
                 IdealModel=''
             if (IdealAddress is None or IdealAddress is '') and (IdealModel is None or IdealModel is ''):
-                MainPageSourceCode_Now = MainPageSourceCode
+                MainPageSourceCode_Now = Preinfo+EmailState+MainPageSourceCode
                 for i in ReturnAllData(ReturnSexFromEmail(EmailAddress)):
                     MainPageSourceCode_Now = MainPageSourceCode_Now + ' <tr>'
                     for n in i:
@@ -177,7 +196,7 @@ def MainPage_get():
 
                 if  ((IdealAddress is  None or IdealAddress is  '') or (IdealModel is None or IdealModel is  '')):
                     if (IdealAddress is  None or IdealAddress is  ''):
-                        MainPageSourceCode_Now = SearchInfo_html+MainPageSourceCode
+                        MainPageSourceCode_Now = Preinfo+EmailState+SearchInfo_html+MainPageSourceCode
                         for i in ReturnInfoFromSexAndModel(ReturnSexFromEmail(EmailAddress), IdealModel):
                             MainPageSourceCode_Now = MainPageSourceCode_Now + ' <tr>'
                             for n in i:
@@ -186,7 +205,7 @@ def MainPage_get():
                         MainPageSourceCode_Now = MainPageSourceCode_Now + '</table>'
                         return (MainPageSourceCode_Now)
                     else:
-                        MainPageSourceCode_Now = SearchInfo_html+MainPageSourceCode
+                        MainPageSourceCode_Now = Preinfo+EmailState+SearchInfo_html+MainPageSourceCode
                         for i in ReturnInfoFromSexAndAddress(ReturnSexFromEmail(EmailAddress),IdealAddress):
                             MainPageSourceCode_Now = MainPageSourceCode_Now + ' <tr>'
                             for n in i:
@@ -195,7 +214,7 @@ def MainPage_get():
                         MainPageSourceCode_Now = MainPageSourceCode_Now + '</table>'
                         return (MainPageSourceCode_Now)
                 else:
-                    MainPageSourceCode_Now = SearchInfo_html+MainPageSourceCode
+                    MainPageSourceCode_Now =Preinfo+EmailState+ SearchInfo_html+MainPageSourceCode
                     for i in ReturnInfoFromSexAndAddressAndModel(ReturnSexFromEmail(EmailAddress),IdealAddress,IdealModel):
                         MainPageSourceCode_Now = MainPageSourceCode_Now + ' <tr>'
                         for n in i:
@@ -242,6 +261,14 @@ def MainPage_post():
 @app.route('/',methods=['GET'])
 def basic_get():
     return redirect('/verify')
+
+@app.route('/signout',methods=['GET'])
+def signout_get():
+    response = redirect('/signin')
+    response.delete_cookie('EmailAddress')
+    response.delete_cookie('Md5')
+    return response
+
 
 
 if __name__ == '__main__':
