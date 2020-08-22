@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # coding:utf-8
-#Html SourceCode Here
+# Html SourceCode Here
 
 def GenerateTDHtmlSourceCode(Value):
-    TransferedValue='<td>'+Value+'</td>'
+    TransferedValue = '<td>' + Value + '</td>'
     return (str(TransferedValue))
 
-VerifySourceCode="""
+
+VerifySourceCode = """
 
 
 <script>
@@ -64,7 +65,7 @@ console.log("本站由Python Flask开发");
 </body>
 </html>
 """
-SigninSourceCode="""
+SigninSourceCode = """
 
 
 
@@ -135,7 +136,7 @@ console.log("本站由Python Flask开发");
 
 """
 
-SignupSourceCode="""
+SignupSourceCode = """
 <form action="/signup" method="post">
 <p>请输入姓名:<br>
 <input type="text" name="UserName" id="UserName" placeholder="请输入用户名" class="logininput form-control input-lg">
@@ -155,7 +156,7 @@ SignupSourceCode="""
 <p>请输入宿舍类型字母，大写<br>
  <input type="text" name="Model" id="Model" placeholder="输入宿舍类型字母" class="logininput form-control input-lg">
 
- 
+
  <p>以下填写你的意向信息：<br>
 <p>请输入意向宿舍地址，可选择下述任意一个，请复制录入，也可填入0，代表不限地址：<br>
 <p>擎天汇 海擎天 擎天半岛 国兴大厦 海明湾畔<br>
@@ -172,7 +173,7 @@ SignupSourceCode="""
  </form>
 
 """
-VerifyEmailSourceCode="""
+VerifyEmailSourceCode = """
 <form action="/VerifyEmail" method="post">
 <p>我们需要验证您的邮箱地址：<br>
 <p>请输入您邮箱收到的验证码<br>
@@ -183,17 +184,17 @@ VerifyEmailSourceCode="""
   <a href='/mainpage'target='_blank'>跳过认证</a>
 
 """
-MainPageSourceCode="""
-<br><br><p>该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换。<br>
+MainPageSourceCode = """
+<br><br><p><font color="#FF0000">该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换。</font><br>
 <meta http-equiv="refresh" content="30">
 
 <form  action="/mainpage" method="post">
    <input type="hidden" style="visibility: hidden;" name="formname" value="Search" />
 
   <input type="text" name="Address" id="Address" placeholder="输入地址" class="logininput form-control input-lg">
-  
+
   <input type="text" name="Model" id="Model" placeholder="输入户型" class="logininput form-control input-lg">
-  
+
   <button   type="submit" > 搜索</button>
  </form>
  <form action="/mainpage" method="post">
@@ -203,7 +204,7 @@ MainPageSourceCode="""
 <p><br>页面30秒自动刷新一次<br>
 <p>温馨提示，您无需一直监测页面，如出现与您登记户型和地址一致的宿舍，系统将自动发邮件通知您
 <br>
-  
+
 </p>
 <p>房源信息：	</p>
 <table width="auto" border="1">
@@ -218,6 +219,6 @@ MainPageSourceCode="""
 	<td>对方期望户型（显示0为任意户型）</td>
 	<td>是否已交换成功(是则显示对方邮箱地址，否显示0)</td>
   </tr>
-  
+
 
 """
