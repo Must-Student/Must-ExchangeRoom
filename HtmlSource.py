@@ -39,6 +39,7 @@ console.log("本站由Python Flask开发");
 
 </head>
 <body class="loginBg">
+<p>该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换。<br>
 <section id="container">
         <div class="loginLogo"></div>
         <!--sidebar start-->
@@ -97,6 +98,8 @@ console.log("本站由Python Flask开发");
 
 </head>
 <body class="loginBg">
+<p>该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换.<br>
+<p>用户首次使用请注册(在登陆按钮旁，注册颜色很灰哦)<br>
 <section id="container">
         <div class="loginLogo"></div>
         <!--sidebar start-->
@@ -176,11 +179,12 @@ VerifyEmailSourceCode="""
 <input type="text" name="VerifyCode" id="VerifyCode" placeholder="验证码" class="logininput form-control input-lg"><br>
  <button style="float: left;" class="btn btn-info" type="submit" id="loginbtn">提交</button>
  </form>
-  <br>
+  <br><p>如一直收不到验证码，可
   <a href='/mainpage'target='_blank'>跳过认证</a>
 
 """
 MainPageSourceCode="""
+<br><br><p>该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换。<br>
 <meta http-equiv="refresh" content="30">
 
 <form  action="/mainpage" method="post">
