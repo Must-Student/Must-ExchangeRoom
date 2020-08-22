@@ -168,10 +168,10 @@ def MainPage_get():
     verify=request.cookies.get('verify')
     EmailAddress= request.cookies.get('EmailAddress')
     Md5=request.cookies.get('Md5')
-    Preinfo='<p>欢迎您 '+EmailAddress+'<a href=/signout> 注销</a><br>'
+    #Preinfo='<p>欢迎您 '+EmailAddress+'<a href=/signout> 注销</a><br>'
     if str(verify) ==str(VerifyCode):
         if str(ReadMd5(EmailAddress) )==Md5:
-
+            Preinfo = '<p>欢迎您 ' + EmailAddress + '<a href=/signout> 注销</a><br>'
             if not(str(ReturnEmailAddressIsVerified(EmailAddress))=='1'):
                 EmailState="<br><a href=/VerifyEmail target='_blank'> 邮箱地址未验证</a>,验证邮箱地址可确保您收到通知邮件"
             try:
