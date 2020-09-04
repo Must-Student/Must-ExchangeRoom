@@ -9,8 +9,7 @@ Python3, Flask, MySql
 Use ExchangeRoom.sql to create Mysql database.
 <br>
 <br>
-In Order TO Generate A Report To All User, pls add the following crontab info to your Linux Server.
-<br>
+In Order TO Generate A Report To All User, pls add the following crontab info to your Linux Server.<br>
 # For details see man 4 crontabs
 
 # Example of job definition:
