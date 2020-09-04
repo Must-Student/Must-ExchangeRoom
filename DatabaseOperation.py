@@ -10,10 +10,10 @@ def md5(password):
     return (hashedPassword.hexdigest())
 
 
-sqlservername='ServerHere'
-sqluser='exchangeroom'
-sqlpasswd='passwordHere'
-sqldatabase='ExchangeRoom'
+sqlservername='servernamehere'
+sqluser='usernamehere'
+sqlpasswd='passwordhere'
+sqldatabase='databasenamehere'
 
 def CheckIfUserExist(emailaddress):
     db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
@@ -162,11 +162,69 @@ def ReturnEmailAddressIsVerified(EmailAddress):
     try :
         check.execute(sql)
         a=check.fetchone()
-        return a
+        if a[0]=='1':
+            return 1
+        else:
+            return 0
     except:
-        return '999'
+        return 0
 
 
+def ReturnInfoFromEmailAddress(EmailAddress):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql = "select UserName, Sex, Address, Model, ContactInfo, Note,IdealAddress, IdealModel, MyDeal from ExchangeRoom.AccountInfo where EmailAddress=" + "'" + EmailAddress + "'"
+    check.execute(sql)
+    a = check.fetchone()
+    # print(a)
+    return a
 
+def CheckEmailAddressAlreadyExist(EmailAddress):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql = "select EmailAddress from ExchangeRoom.AccountInfo where EmailAddress=" + "'" + EmailAddress + "'"
+    try:
+        check.execute(sql)
+        a = check.fetchone()
+        print(a)
+        if a[0]==EmailAddress:
+            return 1
+        if a[0]=='':
+            return 0
+    except:
+        return 0
 
+def UpdateUserInfo(UserName,ContactInfo,Address,Model,IdealAddress,IdealModel,Note,EmailAddress):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql='update '+sqldatabase+'.AccountInfo set Username='+"'"+UserName+"',"+' ContactInfo='+"'"+ContactInfo+"',"+' Address='+"'"+Address+"',"+' Model='+"'"+Model+"',"+' IdealAddress='+"'"+IdealAddress+"',"+' IdealModel='+"'"+IdealModel+"',"+' Note='+"'"+Note+"'"+' where EmailAddress='+"'"+EmailAddress+"';"
+    print(sql)
+    check.execute(sql)
+    db.commit()
+    db.close()
+    return 1
 
+def UpdateBackupEmailAddressByEmailAddress(BackupEmailAddress,EmailAddress,IsVerified):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql = 'update ' + sqldatabase + '.AccountInfo set BackupEmailAddress=' + "'" + BackupEmailAddress + "'," +' IsVerified='+ "'" + IsVerified + "'"+' where EmailAddress=' + "'" + EmailAddress + "'"
+    print(sql)
+    check.execute(sql)
+    db.commit()
+    db.close()
+    return 1
+
+def CheckBackupEmailAddressByEmailAddress(EmailAddress):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql = 'select  BackupEmailAddress from ExchangeRoom.AccountInfo where EmailAddress=' + "'" + EmailAddress + "'"
+    print(sql)
+    check.execute(sql)
+    a = check.fetchone()
+    print(a)
+    db.commit()
+    db.close()
+    if (a[0]=='') or (str(a[0])=='None'):
+        return 0
+    else:
+        return 1
