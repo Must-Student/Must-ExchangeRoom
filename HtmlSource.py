@@ -206,7 +206,7 @@ VerifyBackupEmailSourceCode_Step2="""
 """
 
 MainPageSourceCode="""
-<br><br><a href='/myinfo'target='_blank' >查询/修改个人信息</a>
+<br><br><a href='/myinfo'target='_blank' >查询/修改个人信息</a>&nbsp&nbsp&nbsp<a href='/disableaccount'target='_blank' >注销账号</a>&nbsp&nbsp&nbsp<a href='/comment'target='_blank' >留言</a>
 <br><p><font color="#FF0000">该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换。</font><br>
 <meta http-equiv="refresh" content="10">
 
