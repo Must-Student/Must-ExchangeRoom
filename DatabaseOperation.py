@@ -228,3 +228,15 @@ def CheckBackupEmailAddressByEmailAddress(EmailAddress):
         return 0
     else:
         return 1
+    
+   def DeleteUser(EmailAddress):
+    db = pymysql.connect(sqlservername, sqluser, sqlpasswd, sqldatabase)
+    check = db.cursor()
+    sql = 'delete from ExchangeRoom.AccountInfo where EmailAddress='+"'" + EmailAddress + "'"
+    print(sql)
+    check.execute(sql)
+    a = check.fetchone()
+    print(a)
+    db.commit()
+    db.close()
+    return 1
