@@ -101,6 +101,7 @@ console.log("本站由Python Flask开发");
 <body class="loginBg">
 <p>该系统仅供意向调查，所有操作与科大无关，私下换床位一旦被发现，双方都会被取消入住资格。如达成意向希望调换，需双方到澳后，自行到学生事务处填表交钱，才可申请调换.<br>
 <p>用户首次使用请注册(在登陆按钮旁，注册颜色很灰哦)<br>
+<br><a href='/comment'>点此</a>给本项目留言批评或者夸奖啦<br>
 <section id="container">
         <div class="loginLogo"></div>
         <!--sidebar start-->
