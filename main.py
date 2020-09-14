@@ -426,6 +426,60 @@ def VerifyBackupEmail_post():
         else:
             # print(str(verify),str(VerifyCode))
             return redirect('/signin')
+        
+        
+@app.route('/disableaccount', methods=['GET'])
+def disableaccount_get():
+    #verify = request.cookies.get('verify')
+    EmailAddress = request.cookies.get('EmailAddress')
+    Md5 = request.cookies.get('Md5')
+
+    #if verify == VerifyCode:
+    if str(ReadMd5(EmailAddress)) == Md5:
+        PreHtmlCode='欢迎您:'+EmailAddress+'<br>'
+        return (PreHtmlCode+ConfirmDeleteAccount)
+    else:
+
+        return (SigninSourceCode)
+            #    else:
+#        return redirect('/verify')
+
+
+
+@app.route('/confirmdisableaccount', methods=['GET'])
+def confirmdisableaccount_get():
+    #verify = request.cookies.get('verify')
+    EmailAddress = request.cookies.get('EmailAddress')
+    Md5 = request.cookies.get('Md5')
+
+    #if verify == VerifyCode:
+    if str(ReadMd5(EmailAddress)) == Md5:
+        DeleteUser(EmailAddress)
+        response = redirect('/mainpage')
+        response.delete_cookie('EmailAddress')
+        response.delete_cookie('Md5')
+        return (response)
+    else:
+        return redirect('/mainpage')
+
+@app.route('/comment', methods=['GET'])
+def comment_get():
+    HtmlData=''
+    with open('comment','r') as f:
+        CommentContent=f.read().split('\n')
+    HtmlData=CommentHtmlSourceCode
+    for Comment in CommentContent:
+        HtmlData=HtmlData+'<br>'+Comment
+    return  HtmlData
+
+
+@app.route('/comment', methods=['POST'])
+def comment_post():
+    CommentContent=request.form['Comment']
+    with open('comment','a') as f:
+        f.write('\n'+CommentContent)
+    return ('评论添加成功,<a href="/comment">点此返回</a>评论区')
+
 
 
 if __name__ == '__main__':
