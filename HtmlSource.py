@@ -302,3 +302,28 @@ ChangeMyInfoSourceCode="""
 
 
 """
+
+
+
+CommentHtmlSourceCode='''
+<a href='/mainpage' target='_blank'> 返回主页</a><br>
+<p>请在此为本系统留言啦。任何意见建议或者你觉得本项目帮到你啦，都可以在此留言。<br>
+<form  action="/comment" method="post">
+
+
+  <input type="text" name="Comment" id="Comment" placeholder="点此添加评论" class="logininput form-control input-lg">
+  
+  <button   type="submit" > 添加评论</button>
+ </form>
+
+
+'''
+
+ConfirmDeleteAccount='''
+<p>首先欢迎您使用MUST学生换寝系统，无论找到房子与否，你都可以<a href ='/comment'>点此</a>添加对此系统的评论，亦可填上祝福啦。
+<p>其次，你确认要从系统中删除账号？我们保证，点此按钮后您在系统里的所有信息将会被彻底清除。可<a href=https://github.com/Must-Student/Must-ExchangeRoom>点此检查</a>源代码。<br>
+<a href ='/confirmdisableaccount'>确认删除账户</a>&nbsp&nbsp&nbsp
+<a href ='/mainpage'>取消并返回主页</a>
+<br>
+<p>所以，爱都会消失的，对吗？
+'''
