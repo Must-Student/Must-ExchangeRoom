@@ -109,9 +109,9 @@ def SendEmail(BestMatchList,MatchModleList,MatchAddressList,myemailaddress:str,m
         print('给' + mybackupemailaddress + '发邮件失败')
     if BestMatchList != []:
         try:
-            send_mail_html('admin@mytlu.cn', '匹配成功记录-'+name + '-MUST-Student：换寝需求-每日报告', Content)
+            send_mail_html('roomexchange@must-student.xyz', '匹配成功记录-'+name + '-MUST-Student：换寝需求-每日报告', Content)
         except:
-            print('给' + 'admin@mytlu.cn' + '发邮件失败')
+            print('给' + 'roomexchange@must-student.xyz' + '发邮件失败')
     return 1
 
 
