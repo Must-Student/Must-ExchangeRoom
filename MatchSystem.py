@@ -177,7 +177,7 @@ def HandleDataFromSql():
 def HandleSexData(sex:str):
     '''
     :param sex:strin，'男'或者'女'
-    :return: [['B'], ['擎天半岛'], ['A'], ['擎天半岛'], '徐阳', '1809853gut20005@student.must.edu.mo', '1809853gut20005@student.must.edu.mo', '女', '', '95291899']
+    :return: [['B'], ['擎天半岛'], ['A'], ['擎天半岛'], '法外狂徒张三', 'qwer1gut20005@student.must.edu.mo', 'qwer1gut20005@student.must.edu.mo', '女', '', '0000291899']
     这样元素构成的数组
     '''
     RawData = HandleDataFromSql()
